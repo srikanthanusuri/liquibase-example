@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.liquibase:liquibase-gradle-plugin:1.2.4"
+        classpath group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    }
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'org.liquibase.gradle'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+liquibase {
+    activities {
+        main {
+            changeLogFile "${project.projectDir}/src/main/db/changelogs.groovy"
+            changeLogParameters([
+                    name    : 'foo',
+                    category: 'bar'
+            ])
+            url "jdbc:mysql://localhost/test?nullNamePatternMatchesAll=true&createDatabaseIfNotExist=true"
+            username 'test'
+            password 'test'
+            driver 'com.mysql.jdbc.Driver'
+        }
+    }
+}
