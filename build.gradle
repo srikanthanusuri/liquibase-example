@@ -32,7 +32,7 @@ liquibase {
                     name    : 'foo',
                     category: 'bar'
             ])
-            url "jdbc:mysql://localhost/test?nullNamePatternMatchesAll=true&createDatabaseIfNotExist=true"
+            url "jdbc:mysql://localhost/test?nullNamePatternMatchesAll=true"
             username 'test'
             password 'test'
             driver 'com.mysql.jdbc.Driver'
